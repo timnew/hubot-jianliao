@@ -3,7 +3,7 @@
 url = require('url')
 
 ###
-Overrides handleChatMessage(body, req, res)
+Overrides parseChatMessage(body, req, res)
 Overrides buildChatMessage(user, text)
 ###
 class WebHookAdapter extends Adapter
@@ -52,7 +52,7 @@ class WebHookAdapter extends Adapter
 
     @respondChatMessageRequest(res, message, req)
 
-  handleChatMessage: (body) ->
+  parseChatMessage: (body) ->
     throw new Error('Derived class must return Messsage instance')
 
   respondChatMessageRequest: (res) ->

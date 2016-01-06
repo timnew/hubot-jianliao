@@ -2,7 +2,7 @@
 WebHookAdapter = require('./WebHookAdapter')
 
 class JianLiaoAdapter extends WebHookAdapter
-  handleChatMessage: (incomingMessage) ->
+  parseChatMessage: (incomingMessage) ->
     text = incomingMessage.content
     messageId = incomingMessage._id
 
