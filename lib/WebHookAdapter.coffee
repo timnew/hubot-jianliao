@@ -80,6 +80,8 @@ class WebHookAdapter extends Adapter
     text = strings.join('\n')
     @robot.logger.debug('joined response: ', text)
 
+    @robot.logger.debug('user: ', user)
+
     jsonObj = @buildChatMessage(user, text)
     @robot.logger.debug("Output Body: ", jsonObj)
 
