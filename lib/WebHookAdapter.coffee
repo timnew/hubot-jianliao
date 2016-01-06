@@ -39,7 +39,7 @@ class WebHookAdapter extends Adapter
 
     @outgoingWebHook = parsedUrl.pathname
 
-    @robot.router.post @outgoingWebHook.pathname, @chatOutgoingMessageHandler
+    @robot.router.post @outgoingWebHook, @chatOutgoingMessageHandler
 
     @robot.logger.info('Register Chat Outgoing Webhook at %s', @outgoingWebHook)
 
