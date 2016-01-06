@@ -2,7 +2,7 @@
   "name": "hubot-jianliao",
   "version": "0.0.1",
   "description": "Hubot Jianliao Adapter",
-  "main": "./lib/bearychat",
+  "main": "./lib/jianliao",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
