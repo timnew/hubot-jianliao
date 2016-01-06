@@ -87,7 +87,7 @@ class WebHookAdapter extends Adapter
 
     json = JSON.stringify jsonObj
 
-    @robot.http(@bearyChatIncoming)
+    @robot.http(@incomingWebHook)
           .header('Content-Type', 'application/json')
           .post(json) (err, res, body) =>
             @robot.logger.info 'message sent', body
