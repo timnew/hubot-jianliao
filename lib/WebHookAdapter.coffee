@@ -77,13 +77,14 @@ class WebHookAdapter extends Adapter
   send: (user, strings...) ->
     @robot.logger.info 'Send message', strings...
 
-    strings.forEach (text) =>
-      message = JSON.stringify @buildChatMessage(user, text)
+    text = strings.join('\n')
+    
+    message = JSON.stringify @buildChatMessage(user, text)
 
-      @robot.http(@bearyChatIncoming)
-            .header('Content-Type', 'application/json')
-            .post(message) (err, res, body) =>
-              @robot.logger.info 'message sent', body
+    @robot.http(@bearyChatIncoming)
+          .header('Content-Type', 'application/json')
+          .post(message) (err, res, body) =>
+            @robot.logger.info 'message sent', body
 
   reply: (user, strings...) ->
     @send user, strings...
