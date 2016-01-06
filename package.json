@@ -1,0 +1,31 @@
+{
+  "name": "hubot-jianliao",
+  "version": "0.1.0",
+  "description": "Hubot Jianliao Adapter",
+  "main": "./lib/bearychat",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timnew/hubot-jianliao.git"
+  },
+  "keywords": [
+    "hubot",
+    "bearychat",
+    "adapter",
+    "channel"
+  ],
+  "author": "TimNew",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/timnew/hubot-jianliao/issues"
+  },
+  "homepage": "https://github.com/timnew/hubot-jianliao#readme",
+  "peerDependencies": {
+    "hubot": "^2.17.0"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.10.0"
+  }
+}
