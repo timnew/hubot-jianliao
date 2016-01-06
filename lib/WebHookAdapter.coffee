@@ -43,7 +43,7 @@ class WebHookAdapter extends Adapter
     @robot.logger.info('Register Chat Outgoing Webhook at %s', @outgoingWebHook)
 
   chatOutgoingMessageHandler: (req, res) =>
-    @robot.logger.info req.body
+    @robot.logger.debug req.body
 
     message = @parseChatMessage(req.body, req, res)
 
@@ -80,6 +80,8 @@ class WebHookAdapter extends Adapter
     text = strings.join('\n')
 
     message = JSON.stringify @buildChatMessage(user, text)
+
+    @robot.logger.debug("Output Body: ", message)
 
     @robot.http(@bearyChatIncoming)
           .header('Content-Type', 'application/json')
