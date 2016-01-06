@@ -4,7 +4,7 @@ url = require('url')
 
 ###
 Overrides parseChatMessage(body, req, res)
-Overrides buildChatMessage(user, text)
+Overrides buildChatMessage({user, room, message}, text)
 ###
 class WebHookAdapter extends Adapter
   run: ->
@@ -71,18 +71,18 @@ class WebHookAdapter extends Adapter
 
     @robot.logger.info('Register Chat Incomming Webhook at %s', @incomingWebHook)
 
-  buildChatMessage: (user, strings) ->
+  buildChatMessage: (envelope, text) ->
     throw new Error('Derived class must return body for chat app')
 
-  send: (user, strings...) ->
+  send: (envelope, strings...) ->
     @robot.logger.info 'Send message', strings...
 
     text = strings.join('\n')
     @robot.logger.debug('joined response: ', text)
 
-    @robot.logger.debug('user: ', user)
+    @robot.logger.debug('envelope: ', envelope)
 
-    jsonObj = @buildChatMessage(user, text)
+    jsonObj = @buildChatMessage(envelope, text)
     @robot.logger.debug("Output Body: ", jsonObj)
 
     json = JSON.stringify jsonObj
@@ -92,7 +92,7 @@ class WebHookAdapter extends Adapter
           .post(json) (err, res, body) =>
             @robot.logger.info 'message sent', body
 
-  reply: (user, strings...) ->
-    @send user, strings...
+  reply: (envelope, strings...) ->
+    @send envelope, strings...
 
 module.exports = WebHookAdapter

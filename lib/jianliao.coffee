@@ -23,14 +23,14 @@ class JianLiaoAdapter extends WebHookAdapter
 
     new User(userInfo.id, userInfo)
 
-  buildChatMessage: (user, text) ->
+  buildChatMessage: (envelope, text) ->
     message =
      content: text
 
-    if user.room?
-      message._roomId = user.room.id
+    if envelope.room?
+      message._roomId = envelope.room.id
     else
-      message._toId = user.id
+      message._toId = envelope.user.id
 
     message
 
