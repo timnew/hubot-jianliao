@@ -12,7 +12,6 @@ class WebHookAdapter extends Adapter
     @configIncommingWebHook()
 
     @robot.logger.info "#{@robot.name} is online."
-    @send {}, "#{@robot.name} is online."
 
     @emit 'connected'
 
@@ -78,7 +77,7 @@ class WebHookAdapter extends Adapter
     @robot.logger.info 'Send message', strings...
 
     text = strings.join('\n')
-    
+
     message = JSON.stringify @buildChatMessage(user, text)
 
     @robot.http(@bearyChatIncoming)
