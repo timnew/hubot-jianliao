@@ -71,21 +71,23 @@ class WebHookAdapter extends Adapter
 
     @robot.logger.info('Register Chat Incomming Webhook at %s', @incomingWebHook)
 
-  buildChatMessage: (user, strings...) ->
+  buildChatMessage: (user, strings) ->
     throw new Error('Derived class must return body for chat app')
 
   send: (user, strings...) ->
     @robot.logger.info 'Send message', strings...
 
     text = strings.join('\n')
+    @robot.logger.debug('joined response: ', text)
 
-    message = JSON.stringify @buildChatMessage(user, text)
+    jsonObj = @buildChatMessage(user, text)
+    @robot.logger.debug("Output Body: ", jsonObj)
 
-    @robot.logger.debug("Output Body: ", message)
+    json = JSON.stringify jsonObj
 
     @robot.http(@bearyChatIncoming)
           .header('Content-Type', 'application/json')
-          .post(message) (err, res, body) =>
+          .post(json) (err, res, body) =>
             @robot.logger.info 'message sent', body
 
   reply: (user, strings...) ->
