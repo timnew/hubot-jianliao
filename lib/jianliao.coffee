@@ -10,12 +10,14 @@ class JianLiaoAdapter extends WebHookAdapter
 
   extractUser: (incomingMessage) ->
     rawUser = incomingMessage.creator
-    rawRoom = incomingMessage.room
 
     userInfo =
       id: rawUser._id
       name: rawUser.name
-      room:
+
+    if incomingMessage.room?
+      rawRoom = incomingMessage.room
+      userInfo.room =
         id: rawRoom._id
         topic: rawRoom.topic
 
