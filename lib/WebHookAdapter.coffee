@@ -47,9 +47,10 @@ class WebHookAdapter extends Adapter
 
     message = @parseChatMessage(req.body, req, res)
 
-    @receive message
-
+    @robot.logger.info 'Recieved message: ', message
     @respondChatMessageRequest(res, message, req)
+
+    @receive message
 
   parseChatMessage: (body) ->
     throw new Error('Derived class must return Messsage instance')
