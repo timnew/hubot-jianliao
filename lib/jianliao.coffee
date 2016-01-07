@@ -2,10 +2,14 @@
 WebHookAdapter = require('./WebHookAdapter')
 
 class JianLiaoAdapter extends WebHookAdapter
+  constructor: ->
+    super
+    @nameRegExp = new RegExp("^#{@robot.name}\s+", 'i')
+
   cleanText: (text = '') ->
     text = text.trim()
 
-    unless text.match new Regex("^#{@robot.name}\s+", 'i')
+    unless text.match @nameRegExp
       text = @robot.name + ' ' + text.trim()
 
     text
