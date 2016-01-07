@@ -2,8 +2,16 @@
 WebHookAdapter = require('./WebHookAdapter')
 
 class JianLiaoAdapter extends WebHookAdapter
+  cleanText: (text = '') ->
+    text = text.trim()
+
+    unless text.match new Regex("^#{@robot.name}\s+", 'i')
+      text = @robot.name + ' ' + text.trim()
+
+    text
+
   parseChatMessage: (incomingMessage) ->
-    text = incomingMessage.body
+    text = @cleanText(incomingMessage.body)
     messageId = incomingMessage._id
 
     new TextMessage(@extractUser(incomingMessage), text, messageId)
@@ -23,17 +31,9 @@ class JianLiaoAdapter extends WebHookAdapter
 
     new User(userInfo.id, userInfo)
 
-  cleanText: (text = '') ->
-    text = text.trim()
-
-    unless text.match new Regex("^#{@robot.name}\s+", 'i')
-      text = @robot.name + ' ' + text.trim()
-
-    text
-
   buildChatMessage: (envelope, text) ->
     message =
-     content: @cleanText(text)
+     content: text
 
     if envelope.room?
       message._roomId = envelope.room.id
