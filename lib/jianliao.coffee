@@ -6,16 +6,16 @@ class JianLiaoAdapter extends WebHookAdapter
     super
     @nameRegExp = new RegExp("^#{@robot.name}\s+", 'i')
 
-  cleanText: (text = '') ->
+  cleanText: (text = '', directMessage) ->
     text = text.trim()
 
-    unless text.match @nameRegExp
-      text = @robot.name + ' ' + text.trim()
+    if directMessage and not text.match(@nameRegExp)
+      text = "#{@robot.name} #{text}"
 
     text
 
   parseChatMessage: (incomingMessage) ->
-    text = @cleanText(incomingMessage.body)
+    text = @cleanText(incomingMessage.body, not incomingMessage.room?)
     messageId = incomingMessage._id
 
     new TextMessage(@extractUser(incomingMessage), text, messageId)
