@@ -23,12 +23,11 @@ class JianLiaoAdapter extends WebHookAdapter
 
     new User(userInfo.id, userInfo)
 
-  cleanText: (text) ->
-    text = text.replace(/^\//g, '').trim()
+  cleanText: (text = '') ->
+    text = text.trim()
 
-    text = text.replace(new RegExp("^#{@robot.name.toLowerCase()}", 'gi'), '')
-    text = text.replace(new RegExp("^#{@robot.alias.toLowerCase()}", 'gi'), '') if @robot.alias
-    text = @robot.name + ' ' + text.trim()
+    unless text.match new Regex("^#{@robot.name}\s+", 'i')
+      text = @robot.name + ' ' + text.trim()
 
     text
 
