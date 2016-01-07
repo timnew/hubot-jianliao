@@ -1,6 +1,6 @@
 {
   "name": "hubot-jianliao",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Hubot Jianliao Adapter",
   "main": "./lib/jianliao",
   "scripts": {

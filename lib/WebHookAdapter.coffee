@@ -77,7 +77,7 @@ class WebHookAdapter extends Adapter
   send: (envelope, strings...) ->
     @robot.logger.info 'Send message', strings...
 
-    text = strings.join('\n')
+    text = strings.join('\\n')
     @robot.logger.debug('joined response: ', text)
 
     @robot.logger.debug('envelope: ', envelope)
