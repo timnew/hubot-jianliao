@@ -45,7 +45,11 @@ class WebHookAdapter extends Adapter
   chatOutgoingMessageHandler: (req, res) =>
     @robot.logger.debug req.body
 
-    message = @parseChatMessage(req.body, req, res)
+    try
+      message = @parseChatMessage(req.body, req, res)
+    catch ex
+      @robot.logger.error('Crashed when parsing chat message', ex)
+      return
 
     @robot.logger.info 'Recieved message: ', message
     @respondChatMessageRequest(res, message, req)
