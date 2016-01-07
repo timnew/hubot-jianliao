@@ -23,9 +23,18 @@ class JianLiaoAdapter extends WebHookAdapter
 
     new User(userInfo.id, userInfo)
 
+  cleanText: (text) ->
+    text = text.replace(/^\//g, '').trim()
+
+    text = text.replace(new RegExp("^#{@robot.name.toLowerCase()}", 'gi'), '')
+    text = text.replace(new RegExp("^#{@robot.alias.toLowerCase()}", 'gi'), '') if @robot.alias
+    text = @robot.name + ' ' + text.trim()
+
+    text
+
   buildChatMessage: (envelope, text) ->
     message =
-     content: text
+     content: @cleanText(text)
 
     if envelope.room?
       message._roomId = envelope.room.id
